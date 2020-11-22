@@ -1,0 +1,1643 @@
+{
+  "contractName": "OracleUsability",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "raw",
+          "type": "string"
+        },
+        {
+          "internalType": "enum BookDexAction",
+          "name": "action",
+          "type": "uint8"
+        }
+      ],
+      "name": "__callback",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "__fetch_waiting_queries",
+      "outputs": [
+        {
+          "internalType": "enum BookDexAction[]",
+          "name": "",
+          "type": "uint8[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.0+commit.9e61f92b\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"raw\",\"type\":\"string\"},{\"internalType\":\"enum BookDexAction\",\"name\":\"action\",\"type\":\"uint8\"}],\"name\":\"__callback\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"__fetch_waiting_queries\",\"outputs\":[{\"internalType\":\"enum BookDexAction[]\",\"name\":\"\",\"type\":\"uint8[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/mnt/f/eth/contracts/contracts/libs/oracleLinker.sol\":\"OracleUsability\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/mnt/f/eth/contracts/contracts/libs/oracleLinker.sol\":{\"keccak256\":\"0x72b2e08731932ec825db86d2eaf8dd0d9a64272478b20f9ac6ec241261d6727a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://88632883d765b930dd81b932a81dac7ba66580a61fb69408252c55aa291751f9\",\"dweb:/ipfs/QmbkKhsU826M3GqBu31q5e7EcXexLY4hhgJUmguLc6gewG\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506101ec806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c806308f57fd51461003b5780636908c3731461009a575b600080fd5b610043610120565b6040518080602001828103825283818151815260200191508051906020019060200280838360005b8381101561008657808201518184015260208101905061006b565b505050509050019250505060405180910390f35b61011e600480360360408110156100b057600080fd5b81019080803590602001906401000000008111156100cd57600080fd5b8201836020820111156100df57600080fd5b8035906020019184600183028401116401000000008311171561010157600080fd5b9091929391929390803560ff1690602001909291905050506101a6565b005b6060600080548060200260200160405190810160405280929190818152602001828054801561019c57602002820191906000526020600020906000905b82829054906101000a900460ff16600081111561017657fe5b8152602001906001019060208260000104928301926001038202915080841161015d5790505b5050505050905090565b6101b18383836101a6565b50505056fea2646970667358221220cefb04ae3927636bf6a766f7aa9d0d0a5d49d50a1260affda92fb8c9798588f364736f6c63430007000033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c806308f57fd51461003b5780636908c3731461009a575b600080fd5b610043610120565b6040518080602001828103825283818151815260200191508051906020019060200280838360005b8381101561008657808201518184015260208101905061006b565b505050509050019250505060405180910390f35b61011e600480360360408110156100b057600080fd5b81019080803590602001906401000000008111156100cd57600080fd5b8201836020820111156100df57600080fd5b8035906020019184600183028401116401000000008311171561010157600080fd5b9091929391929390803560ff1690602001909291905050506101a6565b005b6060600080548060200260200160405190810160405280929190818152602001828054801561019c57602002820191906000526020600020906000905b82829054906101000a900460ff16600081111561017657fe5b8152602001906001019060208260000104928301926001038202915080841161015d5790505b5050505050905090565b6101b18383836101a6565b50505056fea2646970667358221220cefb04ae3927636bf6a766f7aa9d0d0a5d49d50a1260affda92fb8c9798588f364736f6c63430007000033",
+  "immutableReferences": {},
+  "sourceMap": "111:694:4:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "111:694:4:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;673:129;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;277:120;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;673:129;737:22;779:15;772:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;673:129;:::o;277:120::-;366:23;377:3;;382:6;366:10;:23::i;:::-;277:120;;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity ^0.7.0;\r\n\r\nenum BookDexAction { FetchMarketERC20Prices }\r\n\r\ncontract OracleUsability {\r\n\r\n    address constant oracle_address = 0x862e71D87856fB83f393f342F853e40b3132F3ea;\r\n    BookDexAction[] internal waiting_queries;\r\n\r\n    function __callback(string calldata raw, BookDexAction action) virtual public {\r\n        __callback(raw, action);\r\n    }\r\n\r\n    function __add_waiting_query(BookDexAction query) internal {\r\n        waiting_queries.push(query);\r\n    }\r\n\r\n    function __ack_ended_query(uint index) internal {\r\n        require(index < waiting_queries.length);\r\n        delete(waiting_queries[index]);\r\n    }\r\n\r\n    function __fetch_waiting_queries() virtual public view returns (BookDexAction[] memory) {\r\n        return waiting_queries;\r\n    }\r\n}",
+  "sourcePath": "/mnt/f/eth/contracts/contracts/libs/oracleLinker.sol",
+  "ast": {
+    "absolutePath": "/mnt/f/eth/contracts/contracts/libs/oracleLinker.sol",
+    "exportedSymbols": {
+      "BookDexAction": [
+        892
+      ],
+      "OracleUsability": [
+        952
+      ]
+    },
+    "id": 953,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 890,
+        "literals": [
+          "solidity",
+          "^",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:23:4"
+      },
+      {
+        "canonicalName": "BookDexAction",
+        "id": 892,
+        "members": [
+          {
+            "id": 891,
+            "name": "FetchMarketERC20Prices",
+            "nodeType": "EnumValue",
+            "src": "83:22:4"
+          }
+        ],
+        "name": "BookDexAction",
+        "nodeType": "EnumDefinition",
+        "src": "62:45:4"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 952,
+        "linearizedBaseContracts": [
+          952
+        ],
+        "name": "OracleUsability",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": true,
+            "id": 895,
+            "mutability": "constant",
+            "name": "oracle_address",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 952,
+            "src": "145:76:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 893,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "145:7:4",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307838363265373144383738353666423833663339336633343246383533653430623331333246336561",
+              "id": 894,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "179:42:4",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_address_payable",
+                "typeString": "address payable"
+              },
+              "value": "0x862e71D87856fB83f393f342F853e40b3132F3ea"
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 898,
+            "mutability": "mutable",
+            "name": "waiting_queries",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 952,
+            "src": "228:40:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage",
+              "typeString": "enum BookDexAction[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 896,
+                "name": "BookDexAction",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 892,
+                "src": "228:13:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_BookDexAction_$892",
+                  "typeString": "enum BookDexAction"
+                }
+              },
+              "id": 897,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "228:15:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage_ptr",
+                "typeString": "enum BookDexAction[]"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 910,
+              "nodeType": "Block",
+              "src": "355:42:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 906,
+                        "name": "raw",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 900,
+                        "src": "377:3:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 907,
+                        "name": "action",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 902,
+                        "src": "382:6:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_enum$_BookDexAction_$892",
+                          "typeString": "enum BookDexAction"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        },
+                        {
+                          "typeIdentifier": "t_enum$_BookDexAction_$892",
+                          "typeString": "enum BookDexAction"
+                        }
+                      ],
+                      "id": 905,
+                      "name": "__callback",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 911,
+                      "src": "366:10:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_string_calldata_ptr_$_t_enum$_BookDexAction_$892_$returns$__$",
+                        "typeString": "function (string calldata,enum BookDexAction)"
+                      }
+                    },
+                    "id": 908,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "366:23:4",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 909,
+                  "nodeType": "ExpressionStatement",
+                  "src": "366:23:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "6908c373",
+            "id": 911,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "__callback",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 903,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 900,
+                  "mutability": "mutable",
+                  "name": "raw",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 911,
+                  "src": "297:19:4",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 899,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "297:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 902,
+                  "mutability": "mutable",
+                  "name": "action",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 911,
+                  "src": "318:20:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_BookDexAction_$892",
+                    "typeString": "enum BookDexAction"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 901,
+                    "name": "BookDexAction",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 892,
+                    "src": "318:13:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_BookDexAction_$892",
+                      "typeString": "enum BookDexAction"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "296:43:4"
+            },
+            "returnParameters": {
+              "id": 904,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "355:0:4"
+            },
+            "scope": 952,
+            "src": "277:120:4",
+            "stateMutability": "nonpayable",
+            "virtual": true,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 922,
+              "nodeType": "Block",
+              "src": "464:46:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 919,
+                        "name": "query",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 913,
+                        "src": "496:5:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_enum$_BookDexAction_$892",
+                          "typeString": "enum BookDexAction"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_enum$_BookDexAction_$892",
+                          "typeString": "enum BookDexAction"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 916,
+                        "name": "waiting_queries",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 898,
+                        "src": "475:15:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage",
+                          "typeString": "enum BookDexAction[] storage ref"
+                        }
+                      },
+                      "id": 918,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "475:20:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_enum$_BookDexAction_$892_$returns$__$",
+                        "typeString": "function (enum BookDexAction)"
+                      }
+                    },
+                    "id": 920,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "475:27:4",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 921,
+                  "nodeType": "ExpressionStatement",
+                  "src": "475:27:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 923,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "__add_waiting_query",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 914,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 913,
+                  "mutability": "mutable",
+                  "name": "query",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 923,
+                  "src": "434:19:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_BookDexAction_$892",
+                    "typeString": "enum BookDexAction"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 912,
+                    "name": "BookDexAction",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 892,
+                    "src": "434:13:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_BookDexAction_$892",
+                      "typeString": "enum BookDexAction"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "433:21:4"
+            },
+            "returnParameters": {
+              "id": 915,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "464:0:4"
+            },
+            "scope": 952,
+            "src": "405:105:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 941,
+              "nodeType": "Block",
+              "src": "566:99:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 932,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "id": 929,
+                          "name": "index",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 925,
+                          "src": "585:5:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "<",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 930,
+                            "name": "waiting_queries",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 898,
+                            "src": "593:15:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage",
+                              "typeString": "enum BookDexAction[] storage ref"
+                            }
+                          },
+                          "id": 931,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "length",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "593:22:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "src": "585:30:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 928,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "577:7:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 933,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "577:39:4",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 934,
+                  "nodeType": "ExpressionStatement",
+                  "src": "577:39:4"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 939,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "UnaryOperation",
+                    "operator": "delete",
+                    "prefix": true,
+                    "src": "627:30:4",
+                    "subExpression": {
+                      "argumentTypes": null,
+                      "components": [
+                        {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 935,
+                            "name": "waiting_queries",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 898,
+                            "src": "634:15:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage",
+                              "typeString": "enum BookDexAction[] storage ref"
+                            }
+                          },
+                          "id": 937,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "id": 936,
+                            "name": "index",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 925,
+                            "src": "650:5:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": true,
+                          "nodeType": "IndexAccess",
+                          "src": "634:22:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_BookDexAction_$892",
+                            "typeString": "enum BookDexAction"
+                          }
+                        }
+                      ],
+                      "id": 938,
+                      "isConstant": false,
+                      "isInlineArray": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "TupleExpression",
+                      "src": "633:24:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_BookDexAction_$892",
+                        "typeString": "enum BookDexAction"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 940,
+                  "nodeType": "ExpressionStatement",
+                  "src": "627:30:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 942,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "__ack_ended_query",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 926,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 925,
+                  "mutability": "mutable",
+                  "name": "index",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 942,
+                  "src": "545:10:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 924,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "545:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "544:12:4"
+            },
+            "returnParameters": {
+              "id": 927,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "566:0:4"
+            },
+            "scope": 952,
+            "src": "518:147:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 950,
+              "nodeType": "Block",
+              "src": "761:41:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 948,
+                    "name": "waiting_queries",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 898,
+                    "src": "779:15:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage",
+                      "typeString": "enum BookDexAction[] storage ref"
+                    }
+                  },
+                  "functionReturnParameters": 947,
+                  "id": 949,
+                  "nodeType": "Return",
+                  "src": "772:22:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "08f57fd5",
+            "id": 951,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "__fetch_waiting_queries",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 943,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "705:2:4"
+            },
+            "returnParameters": {
+              "id": 947,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 946,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 951,
+                  "src": "737:22:4",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_memory_ptr",
+                    "typeString": "enum BookDexAction[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "contractScope": null,
+                      "id": 944,
+                      "name": "BookDexAction",
+                      "nodeType": "UserDefinedTypeName",
+                      "referencedDeclaration": 892,
+                      "src": "737:13:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_BookDexAction_$892",
+                        "typeString": "enum BookDexAction"
+                      }
+                    },
+                    "id": 945,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "737:15:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage_ptr",
+                      "typeString": "enum BookDexAction[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "736:24:4"
+            },
+            "scope": 952,
+            "src": "673:129:4",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "public"
+          }
+        ],
+        "scope": 953,
+        "src": "111:694:4"
+      }
+    ],
+    "src": "35:770:4"
+  },
+  "legacyAST": {
+    "absolutePath": "/mnt/f/eth/contracts/contracts/libs/oracleLinker.sol",
+    "exportedSymbols": {
+      "BookDexAction": [
+        892
+      ],
+      "OracleUsability": [
+        952
+      ]
+    },
+    "id": 953,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 890,
+        "literals": [
+          "solidity",
+          "^",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:23:4"
+      },
+      {
+        "canonicalName": "BookDexAction",
+        "id": 892,
+        "members": [
+          {
+            "id": 891,
+            "name": "FetchMarketERC20Prices",
+            "nodeType": "EnumValue",
+            "src": "83:22:4"
+          }
+        ],
+        "name": "BookDexAction",
+        "nodeType": "EnumDefinition",
+        "src": "62:45:4"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 952,
+        "linearizedBaseContracts": [
+          952
+        ],
+        "name": "OracleUsability",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": true,
+            "id": 895,
+            "mutability": "constant",
+            "name": "oracle_address",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 952,
+            "src": "145:76:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 893,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "145:7:4",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307838363265373144383738353666423833663339336633343246383533653430623331333246336561",
+              "id": 894,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "179:42:4",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_address_payable",
+                "typeString": "address payable"
+              },
+              "value": "0x862e71D87856fB83f393f342F853e40b3132F3ea"
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 898,
+            "mutability": "mutable",
+            "name": "waiting_queries",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 952,
+            "src": "228:40:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage",
+              "typeString": "enum BookDexAction[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 896,
+                "name": "BookDexAction",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 892,
+                "src": "228:13:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_BookDexAction_$892",
+                  "typeString": "enum BookDexAction"
+                }
+              },
+              "id": 897,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "228:15:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage_ptr",
+                "typeString": "enum BookDexAction[]"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 910,
+              "nodeType": "Block",
+              "src": "355:42:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 906,
+                        "name": "raw",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 900,
+                        "src": "377:3:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 907,
+                        "name": "action",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 902,
+                        "src": "382:6:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_enum$_BookDexAction_$892",
+                          "typeString": "enum BookDexAction"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        },
+                        {
+                          "typeIdentifier": "t_enum$_BookDexAction_$892",
+                          "typeString": "enum BookDexAction"
+                        }
+                      ],
+                      "id": 905,
+                      "name": "__callback",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 911,
+                      "src": "366:10:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_string_calldata_ptr_$_t_enum$_BookDexAction_$892_$returns$__$",
+                        "typeString": "function (string calldata,enum BookDexAction)"
+                      }
+                    },
+                    "id": 908,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "366:23:4",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 909,
+                  "nodeType": "ExpressionStatement",
+                  "src": "366:23:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "6908c373",
+            "id": 911,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "__callback",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 903,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 900,
+                  "mutability": "mutable",
+                  "name": "raw",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 911,
+                  "src": "297:19:4",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 899,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "297:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 902,
+                  "mutability": "mutable",
+                  "name": "action",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 911,
+                  "src": "318:20:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_BookDexAction_$892",
+                    "typeString": "enum BookDexAction"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 901,
+                    "name": "BookDexAction",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 892,
+                    "src": "318:13:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_BookDexAction_$892",
+                      "typeString": "enum BookDexAction"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "296:43:4"
+            },
+            "returnParameters": {
+              "id": 904,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "355:0:4"
+            },
+            "scope": 952,
+            "src": "277:120:4",
+            "stateMutability": "nonpayable",
+            "virtual": true,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 922,
+              "nodeType": "Block",
+              "src": "464:46:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 919,
+                        "name": "query",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 913,
+                        "src": "496:5:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_enum$_BookDexAction_$892",
+                          "typeString": "enum BookDexAction"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_enum$_BookDexAction_$892",
+                          "typeString": "enum BookDexAction"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 916,
+                        "name": "waiting_queries",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 898,
+                        "src": "475:15:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage",
+                          "typeString": "enum BookDexAction[] storage ref"
+                        }
+                      },
+                      "id": 918,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "475:20:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_enum$_BookDexAction_$892_$returns$__$",
+                        "typeString": "function (enum BookDexAction)"
+                      }
+                    },
+                    "id": 920,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "475:27:4",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 921,
+                  "nodeType": "ExpressionStatement",
+                  "src": "475:27:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 923,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "__add_waiting_query",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 914,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 913,
+                  "mutability": "mutable",
+                  "name": "query",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 923,
+                  "src": "434:19:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_BookDexAction_$892",
+                    "typeString": "enum BookDexAction"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 912,
+                    "name": "BookDexAction",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 892,
+                    "src": "434:13:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_BookDexAction_$892",
+                      "typeString": "enum BookDexAction"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "433:21:4"
+            },
+            "returnParameters": {
+              "id": 915,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "464:0:4"
+            },
+            "scope": 952,
+            "src": "405:105:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 941,
+              "nodeType": "Block",
+              "src": "566:99:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 932,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "id": 929,
+                          "name": "index",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 925,
+                          "src": "585:5:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "<",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 930,
+                            "name": "waiting_queries",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 898,
+                            "src": "593:15:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage",
+                              "typeString": "enum BookDexAction[] storage ref"
+                            }
+                          },
+                          "id": 931,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "length",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "593:22:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "src": "585:30:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 928,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "577:7:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 933,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "577:39:4",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 934,
+                  "nodeType": "ExpressionStatement",
+                  "src": "577:39:4"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 939,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "UnaryOperation",
+                    "operator": "delete",
+                    "prefix": true,
+                    "src": "627:30:4",
+                    "subExpression": {
+                      "argumentTypes": null,
+                      "components": [
+                        {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 935,
+                            "name": "waiting_queries",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 898,
+                            "src": "634:15:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage",
+                              "typeString": "enum BookDexAction[] storage ref"
+                            }
+                          },
+                          "id": 937,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "id": 936,
+                            "name": "index",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 925,
+                            "src": "650:5:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": true,
+                          "nodeType": "IndexAccess",
+                          "src": "634:22:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_BookDexAction_$892",
+                            "typeString": "enum BookDexAction"
+                          }
+                        }
+                      ],
+                      "id": 938,
+                      "isConstant": false,
+                      "isInlineArray": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "TupleExpression",
+                      "src": "633:24:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_BookDexAction_$892",
+                        "typeString": "enum BookDexAction"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 940,
+                  "nodeType": "ExpressionStatement",
+                  "src": "627:30:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 942,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "__ack_ended_query",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 926,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 925,
+                  "mutability": "mutable",
+                  "name": "index",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 942,
+                  "src": "545:10:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 924,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "545:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "544:12:4"
+            },
+            "returnParameters": {
+              "id": 927,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "566:0:4"
+            },
+            "scope": 952,
+            "src": "518:147:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 950,
+              "nodeType": "Block",
+              "src": "761:41:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 948,
+                    "name": "waiting_queries",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 898,
+                    "src": "779:15:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage",
+                      "typeString": "enum BookDexAction[] storage ref"
+                    }
+                  },
+                  "functionReturnParameters": 947,
+                  "id": 949,
+                  "nodeType": "Return",
+                  "src": "772:22:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "08f57fd5",
+            "id": 951,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "__fetch_waiting_queries",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 943,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "705:2:4"
+            },
+            "returnParameters": {
+              "id": 947,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 946,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 951,
+                  "src": "737:22:4",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_memory_ptr",
+                    "typeString": "enum BookDexAction[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "contractScope": null,
+                      "id": 944,
+                      "name": "BookDexAction",
+                      "nodeType": "UserDefinedTypeName",
+                      "referencedDeclaration": 892,
+                      "src": "737:13:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_BookDexAction_$892",
+                        "typeString": "enum BookDexAction"
+                      }
+                    },
+                    "id": 945,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "737:15:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_enum$_BookDexAction_$892_$dyn_storage_ptr",
+                      "typeString": "enum BookDexAction[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "736:24:4"
+            },
+            "scope": 952,
+            "src": "673:129:4",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "public"
+          }
+        ],
+        "scope": 953,
+        "src": "111:694:4"
+      }
+    ],
+    "src": "35:770:4"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.0+commit.9e61f92b.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.5",
+  "updatedAt": "2020-09-30T21:20:25.236Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

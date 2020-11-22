@@ -1,0 +1,5 @@
+https://github.com/jchittoda/eth-atomic-swap/blob/master/contracts/AtomicSwapERC20.sol
+https://github.com/jchittoda/eth-atomic-swap/blob/master/contracts/ERC20.sol
+
+var dApp
+BookDexToken.deployed().then(function(instance) { dApp = instance; })
